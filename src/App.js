@@ -18,11 +18,18 @@ function App() {
   </soap:Body>
   </soap:Envelope>`;
 
+    var config = {
+      method: "post",
+      url: "http://localhost:8001/studentregistration?wsdl",
+      headers: {
+        "Content-Type": "application/soap+xml",
+      },
+      data: searchxml,
+    };
+
     try {
-      let posts = await axios.post(
-        "http://localhost:8001/studentregistration?wsdl",
-        searchxml
-      );
+      let posts = await axios(config);
+      console.log(posts);
       let jsondata = await parseString.parseStringPromise(posts.data);
       let user = [
         {
@@ -77,13 +84,17 @@ function App() {
       </ws:registration>
     </soap:Body>
   </soap:Envelope>`;
-    let posts = await axios.post(
-      "http://localhost:8001/studentregistration?wsdl",
-      registrationxml,
-      {
-        headers: {},
-      }
-    );
+
+    var config = {
+      method: "post",
+      url: "http://localhost:8001/studentregistration?wsdl",
+      headers: {
+        "Content-Type": "application/soap+xml",
+      },
+      data: registrationxml,
+    };
+
+    let posts = await axios(config);
     let jsondata = await parseString.parseStringPromise(posts.data);
 
     let status =

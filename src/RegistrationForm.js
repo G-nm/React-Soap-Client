@@ -9,6 +9,17 @@ const RegistrationForm = ({ register, registerStatus, setRegisterStatus }) => {
   const [entrypoints, setEntrypoints] = useState("");
   const [email, setEmail] = useState("");
   const [studentid, setStudentid] = useState("");
+
+  const clearInputs = () => {
+    setName("");
+    setAddress("");
+    setAge("");
+    setEmail("");
+    setEntrypoints("");
+    setPhonenumber("");
+    setStudentid("");
+  };
+
   const formhandler = (e) => {
     e.preventDefault();
     let user = {
@@ -22,74 +33,11 @@ const RegistrationForm = ({ register, registerStatus, setRegisterStatus }) => {
     };
 
     register(user);
-  };
-
-  const clearInputs = () => {
-    setName("");
-    setAddress("");
-    setAge("");
-    setEmail("");
-    setEntrypoints("");
-    setPhonenumber("");
-    setStudentid("");
-  };
-
-  const Alert = () => {
-    if (registerStatus === "0") {
-      setTimeout(() => {
-        setRegisterStatus("");
-      }, 5000);
-      return (
-        <div
-          className="alert alert-danger alert-dismissible fade show"
-          role="alert"
-        >
-          Duplicate studentid
-          <button
-            type="button"
-            className="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            onClick={() => {
-              setRegisterStatus("");
-            }}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      );
-    } else if (registerStatus === "1") {
-      clearInputs();
-      setTimeout(() => {
-        setRegisterStatus("");
-      }, 3000);
-
-      return (
-        <div
-          className="alert alert-success alert-dismissible fade show"
-          role="alert"
-        >
-          Inserted successfully
-          <button
-            type="button"
-            className="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            onClick={() => {
-              setRegisterStatus("");
-            }}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      );
-    }
-    return "";
+    clearInputs();
   };
 
   return (
     <>
-      <Alert />
       <div id="register" className="tab-pane active">
         <br />
         <h3 className="ml-3 mt-1">Register</h3>
